@@ -1,0 +1,23 @@
+{
+  "name": "library-api",
+  "version": "1.0.0",
+  "description": "A API for a Flutter App that manages a Community Library",
+  "license": "ISC",
+  "author": "vitao",
+  "type": "commonjs",
+  "main": "server.ts",
+  "scripts": {
+    "build": "",
+    "dev": "echo \"Error: no test specified\" && exit 1",
+    "start": ""
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3"
+  }
+}
