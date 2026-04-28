@@ -1,4 +1,4 @@
-import { edit_service, getall_service } from "../services/library.service";
+import { delete_service, edit_service, getall_service } from "../services/library.service";
 import { Request, Response } from "express";
 
 export async function getall_controller({}: Request, res: Response) {
@@ -9,19 +9,17 @@ export async function getall_controller({}: Request, res: Response) {
 
 export async function edit_controller(req: Request, res: Response) {
     const { table, name } = req.params;
+    const { update } = req.body;
 
-    const edit = edit_service(table, name);
+    const edit = await edit_service(table, update, name);
     
-    return res.status(200).json({
-        edit
-    });
+    return res.status(200).json(edit);
 }
 
 export async function delete_controller(req: Request, res: Response) {
     const { table, name } = req.params;
+
+    const _delete = delete_service(table, name)
     
-    return res.status(200).json({
-        table,
-        name
-    });
+    return res.status(200).json(_delete);
 }

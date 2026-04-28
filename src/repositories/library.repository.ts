@@ -14,6 +14,23 @@ export async function getall_repository() {
     return result.rows;
 }
 
-export async function edit_repository(table: any, name: any) {
-    return table + name;
+export async function edit_repository(table: any, update: string, name: any) {
+    const db = await get_db();
+
+    const query: string = `
+        UPDATE ${table} SET name = $1 WHERE name = $2`;
+
+    const result = await db.query(query, [update, name]);
+
+    return result.rows[0];
+}
+
+export async function delete_repository(table: any, name: any) {
+    const db = await get_db();
+
+    const query: string = `DELETE FROM ${table} WHERE name = $1`;
+
+    const result = await db.query(query, [name]);
+
+    return result.rows[0];
 }
