@@ -11,7 +11,7 @@ async function library_repository() {
     
     const result = await db.query(join_query, []);
 
-    return result.rows ?? null;
+    return result.rows;
 }
 
 export default library_repository;
