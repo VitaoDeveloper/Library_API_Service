@@ -28,7 +28,7 @@ async function try_connection(): Promise<Pool> {
 let _conn: Pool | null;
 
 export async function init_db(): Promise<void> {
-    _conn = await try_connection();
+    if (!_conn) _conn = await try_connection();
 }
 
 export async function get_db(): Promise<Pool> {
