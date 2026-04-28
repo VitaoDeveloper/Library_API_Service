@@ -1,8 +1,8 @@
-import library_repository from "../repositories/library.repository";
+import getall_repository from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
 
-async function library_service() {
-    const library_data = await library_repository();
+async function getall_service() {
+    const library_data = await getall_repository();
 
     const result: LibraryData = {};
     
@@ -14,4 +14,4 @@ async function library_service() {
     return result;
 }
 
-export default library_service;
+export default getall_service;

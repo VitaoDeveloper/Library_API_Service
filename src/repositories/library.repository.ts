@@ -1,6 +1,6 @@
 import { get_db } from "../database/db";
 
-async function library_repository() {
+async function getall_repository() {
     const db = await get_db();
 
     const join_query: string = `
@@ -14,4 +14,4 @@ async function library_repository() {
     return result.rows;
 }
 
-export default library_repository;
+export default getall_repository;
