@@ -1,4 +1,4 @@
-import getall_service from "../services/library.service";
+import { edit_service, getall_service } from "../services/library.service";
 import { Request, Response } from "express";
 
 export async function getall_controller({}: Request, res: Response) {
@@ -9,10 +9,11 @@ export async function getall_controller({}: Request, res: Response) {
 
 export async function edit_controller(req: Request, res: Response) {
     const { table, name } = req.params;
+
+    const edit = edit_service(table, name);
     
     return res.status(200).json({
-        table,
-        name
+        edit
     });
 }
 

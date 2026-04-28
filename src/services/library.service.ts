@@ -1,7 +1,7 @@
-import getall_repository from "../repositories/library.repository";
+import { edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
 
-async function getall_service() {
+export async function getall_service() {
     const library_data = await getall_repository();
 
     const result: LibraryData = {};
@@ -14,4 +14,8 @@ async function getall_service() {
     return result;
 }
 
-export default getall_service;
+export async function edit_service(table: any, name: any) {
+    const edit = edit_repository(table, name);
+    
+    return edit;
+}
