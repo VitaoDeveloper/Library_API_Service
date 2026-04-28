@@ -7,7 +7,7 @@ const library_routes: Router = Router();
 library_routes.get("/getall", getall_controller);
 
 // PUT edit library data
-library_routes.put("/edit/:table/:name", edit_controller);
+library_routes.patch("/edit/:table/:name", edit_controller);
 
 // DELETE library data
 library_routes.delete("/delete/:table/:name", delete_controller);
