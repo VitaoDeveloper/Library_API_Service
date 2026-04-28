@@ -26,13 +26,16 @@ async function try_connection(): Promise<Pool> {
 }
 
 let _conn: Pool | null;
-
-export async function init_db(): Promise<void> {
-    if (!_conn) _conn = await try_connection();
-}
+let _initPromise: Promise<Pool> | null;
 
 export async function get_db(): Promise<Pool> {
-    if (!_conn) throw new Error("Pool has not been initialized. Call init_db to initialize.");
+    if (_conn) return _conn;
+
+    if (!_initPromise) {
+        _initPromise = try_connection();
+    }
+
+    _conn = await _initPromise;
 
     return _conn;
 }
