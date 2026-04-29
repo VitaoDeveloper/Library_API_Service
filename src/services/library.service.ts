@@ -68,15 +68,16 @@ export async function delete_service(table: any, name: any) {
     } catch (error: any) {
         if (error.code === "23503") {
             const delete_parent = error.detail?.includes("is still referenced");
-            const insert_orphan = error.detail?.includes("is not present");
 
             if (delete_parent) {
-                return error;
-            }
-            if (insert_orphan) {
-                return error;
+                return {
+                    status: "error",
+                    code: error.code,
+                    message: "Não é possível excluir um gênero que possui livros cadastrados."
+                };
             }
         }
+
         return error;
     }
 }

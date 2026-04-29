@@ -50,7 +50,7 @@ export async function edit_repository(table: any, update: string, name: any) {
     const db = await get_db();
 
     const query: string = `
-        UPDATE ${table} SET name = $1 WHERE name = $2`;
+        UPDATE ${table} SET name = $1 WHERE name = $2 RETURNING *`;
 
     const result = await db.query(query, [update, name]);
 
@@ -60,7 +60,7 @@ export async function edit_repository(table: any, update: string, name: any) {
 export async function delete_repository(table: any, name: any) {
     const db = await get_db();
 
-    const query: string = `DELETE FROM ${table} WHERE name = $1`;
+    const query: string = `DELETE FROM ${table} WHERE name = $1 RETURNING *`;
 
     const result = await db.query(query, [name]);
 
