@@ -1,27 +1,82 @@
-import { delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
+import CreateRequest from "../interface/CreateRequest";
+import { create_repository, delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
 
 export async function getall_service() {
-    const library_data = await getall_repository();
+    try {
+        const library_data = await getall_repository();
 
-    const result: LibraryData = {};
-    
-    for (const row of library_data) {
-        if (!result[row.gender]) result[row.gender] = [];
-        if (!result[row.gender][row.book]) result[row.gender].push(row.book);
+        const result: LibraryData = {};
+        
+        for (const row of library_data) {
+            if (!result[row.gender]) result[row.gender] = [];
+            if (!result[row.gender][row.book]) result[row.gender].push(row.book);
+        }
+
+        return result;
+    } catch (error: any) {
+        return error;
+    }
+}
+
+export async function create_service(table: any, data: CreateRequest) {
+    try {
+        const { name, gender } = data;
+        let body: CreateRequest = { name };
+
+        switch (table) {
+            case "books":
+                body = {
+                    id: crypto.randomUUID(),
+                    name,
+                    gender
+                }
+                break;
+
+            case "genders":
+                body = {
+                    id: crypto.randomUUID(),
+                    name,
+                }
+                break;
+        }
+
+        const create = await create_repository(table, body);
+
+        return create;
+    } catch (error: any) {
+        return error;
     }
 
-    return result;
 }
 
 export async function edit_service(table: any, update: string, name: any) {
-    const edit = await edit_repository(table, update, name);
-    
-    return edit;
+    try {
+        const edit = await edit_repository(table, update, name);
+        
+        return edit;
+    } catch (error: any) {
+        return error;
+    }
 }
 
 export async function delete_service(table: any, name: any) {
-    const _delete = await delete_repository(table, name);
+    try {
+        const _delete = await delete_repository(table, name);
     
-    return _delete;
+        return _delete;
+    } catch (error: any) {
+        if (error.code === "23503") {
+            const delete_parent = error.detail?.includes("is still referenced");
+            const insert_orphan = error.detail?.includes("is not present");
+
+            if (delete_parent) {
+                return error;
+            }
+            if (insert_orphan) {
+                return error;
+            }
+        }
+        return error;
+    }
 }

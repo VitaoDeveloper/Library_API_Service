@@ -3,7 +3,7 @@ import env from "./config/env";
 
 async function initialize_api() {
     app.listen(env.port, () => {
-        console.log(`\nServer running on ${location}`);
+        console.log(`\nServer running on port ${env.port}`);
     });
 }
 

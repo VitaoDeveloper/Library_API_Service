@@ -1,4 +1,5 @@
 import { get_db } from "../database/db";
+import CreateRequest from "../interface/CreateRequest";
 
 export async function getall_repository() {
     const db = await get_db();
@@ -12,6 +13,37 @@ export async function getall_repository() {
     const result = await db.query(join_query, []);
 
     return result.rows;
+}
+
+export async function create_repository(table: any, data: CreateRequest) {
+    const db = await get_db();
+
+    if (table == "books") {
+        const query: string = `INSERT INTO books (id, name, gender) VALUES ($1, $2, $3) RETURNING *`;
+        const values: string[] = [
+            data.id!,
+            data.name,
+            data.gender!
+        ];
+
+        const create = await db.query(query, values);
+
+        return create.rows[0] ?? null;
+    }
+
+    if (table == "genders") {
+        const query: string = `INSERT INTO genders (id, name) VALUES ($1, $2) RETURNING *`;
+        const values: string[] = [
+            data.id!,
+            data.name
+        ];
+
+        const create = await db.query(query, values);
+
+        return create.rows[0] ?? null;
+    }
+
+    return null;
 }
 
 export async function edit_repository(table: any, update: string, name: any) {
