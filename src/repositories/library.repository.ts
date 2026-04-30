@@ -4,13 +4,9 @@ import CreateRequest from "../interface/CreateRequest";
 export async function getall_repository() {
     const db = await get_db();
 
-    const join_query: string = `
-        SELECT g.name AS gender, b.name AS book
-        FROM genders g
-        LEFT JOIN books b ON b.gender = g.name
-        ORDER BY g.name`;
+    const query: string = `SELECT gender, book FROM getall_view`;
     
-    const result = await db.query(join_query, []);
+    const result = await db.query(query, []);
 
     return result.rows;
 }
