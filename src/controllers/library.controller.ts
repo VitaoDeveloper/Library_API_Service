@@ -12,7 +12,7 @@ export async function create_controller(req: Request, res: Response) {
     const { table } = req.params;
     const data: CreateRequest = {
         name: req.body.name,
-        gender: req.body.gender
+        genre: req.body.genre
     };
 
     const create = await create_service(table, data);

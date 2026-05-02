@@ -9,8 +9,8 @@ export async function getall_service() {
         const result: LibraryData = {};
         
         for (const row of library_data) {
-            if (!result[row.gender]) result[row.gender] = [];
-            if (!result[row.gender][row.book]) result[row.gender].push(row.book);
+            if (!result[row.genre]) result[row.genre] = [];
+            if (!result[row.genre][row.book]) result[row.genre].push(row.book);
         }
 
         return result;
@@ -21,7 +21,7 @@ export async function getall_service() {
 
 export async function create_service(table: any, data: CreateRequest) {
     try {
-        const { name, gender } = data;
+        const { name, genre } = data;
         let body: CreateRequest = { name };
 
         switch (table) {
@@ -29,11 +29,11 @@ export async function create_service(table: any, data: CreateRequest) {
                 body = {
                     id: crypto.randomUUID(),
                     name,
-                    gender
+                    genre
                 }
                 break;
 
-            case "genders":
+            case "genres":
                 body = {
                     id: crypto.randomUUID(),
                     name,

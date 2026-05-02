@@ -4,7 +4,7 @@ import CreateRequest from "../interface/CreateRequest";
 export async function getall_repository() {
     const db = await get_db();
 
-    const query: string = `SELECT gender, book FROM getall_view`;
+    const query: string = `SELECT genre, book FROM getall_view`;
     
     const result = await db.query(query, []);
 
@@ -15,11 +15,11 @@ export async function create_repository(table: any, data: CreateRequest) {
     const db = await get_db();
 
     if (table == "books") {
-        const query: string = `INSERT INTO books (id, name, gender) VALUES ($1, $2, $3) RETURNING *`;
+        const query: string = `INSERT INTO books (id, name, genre) VALUES ($1, $2, $3) RETURNING *`;
         const values: string[] = [
             data.id!,
             data.name,
-            data.gender!
+            data.genre!
         ];
 
         const create = await db.query(query, values);
@@ -27,8 +27,8 @@ export async function create_repository(table: any, data: CreateRequest) {
         return create.rows[0] ?? null;
     }
 
-    if (table == "genders") {
-        const query: string = `INSERT INTO genders (id, name) VALUES ($1, $2) RETURNING *`;
+    if (table == "genres") {
+        const query: string = `INSERT INTO genres (id, name) VALUES ($1, $2) RETURNING *`;
         const values: string[] = [
             data.id!,
             data.name
