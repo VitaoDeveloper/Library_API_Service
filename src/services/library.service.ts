@@ -1,6 +1,7 @@
 import CreateRequest from "../interface/CreateRequest";
 import { create_repository, delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
+import fk_violation_catch from "../utils/catches/fk_violation";
 
 export async function getall_service() {
     try {
@@ -56,6 +57,10 @@ export async function edit_service(table: any, update: string, name: any) {
         
         return edit;
     } catch (error: any) {
+        if (error.code == "23503") {
+            const message: string = await fk_violation_catch(error)
+        }
+
         return error;
     }
 }
