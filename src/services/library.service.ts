@@ -1,6 +1,7 @@
 import CreateRequest from "../interface/CreateRequest";
 import { create_repository, delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
+import crypto from 'crypto'
 
 export async function getall_service() {
     const library_data = await getall_repository();
