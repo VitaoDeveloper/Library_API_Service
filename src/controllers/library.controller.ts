@@ -3,7 +3,14 @@ import { create_service, delete_service, edit_service, getall_service } from "..
 import { Request, Response } from "express";
 
 export async function getall_controller({}: Request, res: Response) {
-    const library_data = await getall_service();
+    const result = await getall_service();
+
+    const library_data = Object.fromEntries(
+        Object.entries(result).map(([key, values]) => [
+            key,
+            values.filter((v) => v != null),
+        ])
+    );
     
     return res.status(200).json(library_data);
 }
