@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import error_middleware from "./middlewares/error.middleware";
 import router from "./router/router";
 import cors from 'cors';
 
@@ -14,5 +15,13 @@ app.get("/", async ({}: Request, res: Response) => {
 });
 
 app.use(router)
+
+app.use(({}: Request, res: Response) => {
+    res.status(404).json({
+        error: "Not found"
+    });
+})
+
+app.use(error_middleware)
 
 export default app;
