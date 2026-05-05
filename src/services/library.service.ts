@@ -2,6 +2,7 @@ import CreateRequest from "../interface/CreateRequest";
 import { create_repository, delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
 import crypto from 'crypto'
+import MainParams from "../types/MainParams";
 
 export async function getall_service() {
     const library_data = await getall_repository();
@@ -16,7 +17,7 @@ export async function getall_service() {
     return result;
 }
 
-export async function create_service(table: any, data: CreateRequest) {
+export async function create_service(table: string, data: CreateRequest) {
     const { name, genre } = data;
     let body: CreateRequest = { name };
 
@@ -42,13 +43,13 @@ export async function create_service(table: any, data: CreateRequest) {
     return create;
 }
 
-export async function edit_service(table: any, update: string, name: any) {
+export async function edit_service(table: string, update: string, name: string) {
     const edit = await edit_repository(table, update, name);
     
     return edit;
 }
 
-export async function delete_service(table: any, name: any) {
+export async function delete_service(table: string, name: string) {
     const _delete = await delete_repository(table, name);
 
     return _delete;

@@ -1,6 +1,7 @@
 import CreateRequest from "../interface/CreateRequest";
 import { create_service, delete_service, edit_service, getall_service } from "../services/library.service";
 import { Request, Response } from "express";
+import MainParams from "../types/MainParams";
 
 export async function getall_controller({}: Request, res: Response) {
     const result = await getall_service();
@@ -15,7 +16,7 @@ export async function getall_controller({}: Request, res: Response) {
     return res.status(200).json(library_data);
 }
 
-export async function create_controller(req: Request, res: Response) {
+export async function create_controller(req: Request<{ table: string }>, res: Response) {
     const { table } = req.params;
     const data: CreateRequest = {
         name: req.body.name,
@@ -27,7 +28,7 @@ export async function create_controller(req: Request, res: Response) {
     return res.status(200).json(create);
 }
 
-export async function edit_controller(req: Request, res: Response) {
+export async function edit_controller(req: Request<MainParams>, res: Response) {
     const { table, name } = req.params;
     const { update } = req.body;
 
@@ -36,7 +37,7 @@ export async function edit_controller(req: Request, res: Response) {
     return res.status(200).json(edit);
 }
 
-export async function delete_controller(req: Request, res: Response) {
+export async function delete_controller(req: Request<MainParams>, res: Response) {
     const { table, name } = req.params;
 
     const _delete = await delete_service(table, name)

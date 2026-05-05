@@ -11,7 +11,7 @@ export async function getall_repository() {
     return result.rows;
 }
 
-export async function create_repository(table: any, data: CreateRequest) {
+export async function create_repository(table: string, data: CreateRequest) {
     const db = await get_db();
 
     if (table == "books") {
@@ -42,7 +42,7 @@ export async function create_repository(table: any, data: CreateRequest) {
     return null;
 }
 
-export async function edit_repository(table: any, update: string, name: any) {
+export async function edit_repository(table: string, update: string, name: string) {
     const db = await get_db();
 
     const query: string = `
@@ -53,7 +53,7 @@ export async function edit_repository(table: any, update: string, name: any) {
     return result.rows[0];
 }
 
-export async function delete_repository(table: any, name: any) {
+export async function delete_repository(table: string, name: string) {
     const db = await get_db();
 
     const query: string = `DELETE FROM ${table} WHERE name = $1 RETURNING *`;
