@@ -1,7 +1,6 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import swagger_config from "../config/swagger";
-import type { Request, Response } from "express";
+import swagger_config from "./config";
 
 const spec = swaggerJsdoc(swagger_config);
 

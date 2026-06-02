@@ -5,7 +5,7 @@ const swagger_config: OAS3Options = {
         openapi: "3.0.0",
         info: {
             title: "Library API",
-            version: "1.0.0",
+            version: "1.1.0",
             description:
                 "API para gerenciamento de uma Biblioteca Comunitária"
         },
@@ -52,7 +52,7 @@ const swagger_config: OAS3Options = {
             }
         }
     },
-    apis: ["./src/controllers/*.ts"]
+    apis: ["./src/docs/*.ts"]
 };
 
 export default swagger_config;
