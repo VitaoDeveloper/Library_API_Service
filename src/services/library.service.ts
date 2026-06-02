@@ -18,7 +18,7 @@ export async function getall_service() {
 }
 
 export async function create_service(table: Table, data: CreateRequest) {
-    const { name, genre } = data;
+    const { name, genre_id } = data;
     let body: CreateRequest = { name };
 
     switch (table) {
@@ -26,7 +26,7 @@ export async function create_service(table: Table, data: CreateRequest) {
             body = {
                 id: crypto.randomUUID(),
                 name,
-                genre
+                genre_id
             }
             break;
 

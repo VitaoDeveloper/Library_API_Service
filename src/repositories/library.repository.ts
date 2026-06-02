@@ -17,11 +17,11 @@ export async function create_repository(table: Table, data: CreateRequest) {
     const db = await get_db();
 
     if (table == "books") {
-        const query: string = `INSERT INTO books (id, name, genre) VALUES ($1, $2, $3) RETURNING *`;
+        const query: string = `INSERT INTO books (id, name, genre_id) VALUES ($1, $2, $3) RETURNING *`;
         const values: string[] = [
             data.id!,
             data.name,
-            data.genre!
+            data.genre_id!
         ];
 
         const create = await db.query(query, values);

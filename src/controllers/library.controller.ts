@@ -18,12 +18,12 @@ export async function getall_controller({}: Request, res: Response) {
 }
 
 export async function create_controller(req: Request<{ table: Table }, MainResponse, CreateRequest>, res: Response<MainResponse>) {
-    const { name, genre } = req.body;
+    const { name, genre_id } = req.body;
     const { table } = req.params;
 
     const data: CreateRequest = {
         name,
-        genre
+        genre_id
     };
 
     const create = await create_service(table, data);
