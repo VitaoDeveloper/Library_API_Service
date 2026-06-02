@@ -1,6 +1,8 @@
+import { UUID } from "node:crypto";
+
 export type Table = "books" | "genres"
 
 export type MainParams = {
     table: Table,
-    name: string
+    id: UUID
 };

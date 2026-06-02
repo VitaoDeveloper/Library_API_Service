@@ -1,3 +1,4 @@
+import { UUID } from "node:crypto";
 import { get_db } from "../database/db";
 import CreateRequest from "../interface/CreateRequest";
 import { Table } from "../types/Params";
@@ -43,23 +44,23 @@ export async function create_repository(table: Table, data: CreateRequest) {
     return null;
 }
 
-export async function edit_repository(table: Table, update: string, name: string) {
+export async function edit_repository(table: Table, update: string, id: UUID) {
     const db = await get_db();
 
     const query: string = `
-        UPDATE ${table} SET name = $1 WHERE name = $2 RETURNING *`;
+        UPDATE ${table} SET name = $1 WHERE id = $2 RETURNING *`;
 
-    const result = await db.query(query, [update, name]);
+    const result = await db.query(query, [update, id]);
 
     return result.rows[0];
 }
 
-export async function delete_repository(table: Table, name: string) {
+export async function delete_repository(table: Table, id: UUID) {
     const db = await get_db();
 
-    const query: string = `DELETE FROM ${table} WHERE name = $1 RETURNING *`;
+    const query: string = `DELETE FROM ${table} WHERE id = $1 RETURNING *`;
 
-    const result = await db.query(query, [name]);
+    const result = await db.query(query, [id]);
 
     return result.rows[0];
 }

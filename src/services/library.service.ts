@@ -1,7 +1,7 @@
 import CreateRequest from "../interface/CreateRequest";
 import { create_repository, delete_repository, edit_repository, getall_repository } from "../repositories/library.repository";
 import LibraryData from "../types/LibraryData";
-import crypto from 'crypto'
+import crypto, { UUID } from 'crypto'
 import { Table } from "../types/Params";
 
 export async function getall_service() {
@@ -43,14 +43,14 @@ export async function create_service(table: Table, data: CreateRequest) {
     return create;
 }
 
-export async function edit_service(table: Table, update: string, name: string) {
-    const edit = await edit_repository(table, update, name);
+export async function edit_service(table: Table, update: string, id: UUID) {
+    const edit = await edit_repository(table, update, id);
     
     return edit;
 }
 
-export async function delete_service(table: Table, name: string) {
-    const _delete = await delete_repository(table, name);
+export async function delete_service(table: Table, id: UUID) {
+    const _delete = await delete_repository(table, id);
 
     return _delete;
 }

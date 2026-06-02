@@ -32,18 +32,18 @@ export async function create_controller(req: Request<{ table: Table }, MainRespo
 }
 
 export async function edit_controller(req: Request<MainParams, MainResponse, { update: string }>, res: Response<MainResponse>) {
-    const { table, name } = req.params;
+    const { table, id } = req.params;
     const { update } = req.body;
 
-    const edit = await edit_service(table, update, name);
+    const edit = await edit_service(table, update, id);
     
     return res.status(200).json(edit);
 }
 
 export async function delete_controller(req: Request<MainParams, MainResponse>, res: Response<MainResponse>) {
-    const { table, name } = req.params;
+    const { table, id } = req.params;
 
-    const _delete = await delete_service(table, name)
+    const _delete = await delete_service(table, id)
     
     return res.status(200).json(_delete);
 }
