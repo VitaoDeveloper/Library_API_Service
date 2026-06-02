@@ -7,21 +7,41 @@
  *     tags:
  *       - Biblioteca
  *     summary: Retorna todos os dados da biblioteca
- *     description: Agrupa livros por gênero e retorna um objeto chave-valor
+ *     description: Retorna um array de gêneros com seus livros agrupados
  *     responses:
  *       200:
- *         description: Dados da biblioteca agrupados por gênero
+ *         description: Lista de gêneros com livros
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               additionalProperties:
- *                 type: array
- *                 items:
- *                   type: string
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                     format: uuid
+ *                   genre:
+ *                     type: string
+ *                   books:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                           format: uuid
+ *                         name:
+ *                           type: string
  *             example:
- *               Ficção: ["Dom Casmurro", "1984"]
- *               Romance: ["Orgulho e Preconceito"]
+ *               - id: "3209b136-234a-4894-a34b-..."
+ *                 genre: "Ficção"
+ *                 books:
+ *                   - id: "9234fbb8-fd72-43fa-a49b-..."
+ *                     name: "Livro dos Mortos"
+ *               - id: "71f217e3-dee8-42b6-be6c-..."
+ *                 genre: "Terror"
+ *                 books: []
  */
 
 /**
