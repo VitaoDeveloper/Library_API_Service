@@ -1,8 +1,8 @@
-# 📚 Library API Service
+# Library API Service
 
 API RESTful para gerenciamento de uma biblioteca comunitária, desenvolvida como backend para um aplicativo Flutter.
 
-## 🚀 Tecnologias
+## Tecnologias
 
 - **Node.js** — Runtime JavaScript
 - **TypeScript** — Tipagem estática (strict mode)
@@ -10,7 +10,7 @@ API RESTful para gerenciamento de uma biblioteca comunitária, desenvolvida como
 - **PostgreSQL** — Banco de dados relacional
 - **Neon** — PostgreSQL serverless
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 src/
@@ -37,17 +37,17 @@ src/
 └── types/                        # Tipos compartilhados
 ```
 
-## 📡 Endpoints
+## Endpoints
 
 | Método   | Rota                  | Descrição                          |
 |----------|-----------------------|------------------------------------|
 | `GET`    | `/`                   | Mensagem de boas-vindas            |
 | `GET`    | `/getall`             | Livros agrupados por gênero        |
 | `POST`   | `/create/:table`      | Criar registro (books ou genres)   |
-| `PATCH`  | `/edit/:table/:name`  | Renomear registro pelo nome        |
-| `DELETE` | `/delete/:table/:name`| Excluir registro pelo nome         |
+| `PATCH`  | `/edit/:table/:id`    | Renomear registro pelo id          |
+| `DELETE` | `/delete/:table/:id`  | Excluir registro pelo id           |
 
-## 🛠️ Como Executar
+## Como Executar
 
 1. Clone o repositório:
    ```bash
@@ -57,7 +57,7 @@ src/
 
 2. Instale as dependências:
    ```bash
-   yarn install
+   yarn
    ```
 
 3. Configure as variáveis de ambiente:
@@ -71,7 +71,7 @@ src/
    yarn dev
    ```
 
-## 🧱 Arquitetura
+## Arquitetura
 
 O projeto segue uma arquitetura em camadas:
 
@@ -81,10 +81,6 @@ Routes → Controller → Service → Repository → PostgreSQL
 
 Cada camada tem responsabilidades bem definidas, facilitando testes e manutenção.
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
-O esquema espera as tabelas `books` e `genres` com colunas `id`, `name`, `genre` (em books) e `created_at`, além da view `getall_view` para agregação de livros por gênero.
-
-## 📄 Licença
-
-Este projeto é de uso livre e aberto.
+O esquema espera as tabelas `books` e `genres` com colunas `id`, `name`, `genre_id` (em books) e `created_at`, além da view `getall_view` para agregação de livros por gênero.
