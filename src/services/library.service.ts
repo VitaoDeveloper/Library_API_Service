@@ -10,11 +10,23 @@ export async function getall_service() {
     const result: LibraryData = {};
     
     for (const row of library_data) {
-        if (!result[row.genre]) result[row.genre] = [];
-        if (!result[row.genre][row.book]) result[row.genre].push(row.book);
-    }
+        if (!result[row.genre_id]) {
+            result[row.genre_id] = {
+                id: row.genre_id,
+                genre: row.genre,
+                books: []
+            };
+        }
 
-    return result;
+        if (row.book_id) {
+            result[row.genre_id].books.push({
+                id: row.book_id,
+                name: row.book
+            });
+        }
+    }
+    
+    return Object.values(result);
 }
 
 export async function create_service(table: Table, data: CreateRequest) {

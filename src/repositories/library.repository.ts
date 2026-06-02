@@ -6,7 +6,7 @@ import { Table } from "../types/Params";
 export async function getall_repository() {
     const db = await get_db();
 
-    const query: string = `SELECT genre, book FROM getall_view`;
+    const query: string = `SELECT * FROM getall_view`;
     
     const result = await db.query(query, []);
 
