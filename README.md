@@ -51,7 +51,6 @@ src/
 |----------|-----------------------|------------------------------------|
 | `GET`    | `/`                   | Mensagem de boas-vindas            |
 | `GET`    | `/getall`             | Gêneros com livros agrupados       |
-| `GET`    | `/getall?genre_id=X`  | Filtra livros por gênero           |
 | `POST`   | `/create/:table`      | Criar registro (books ou genres)   |
 | `PATCH`  | `/edit/:table/:id`    | Renomear registro pelo ID          |
 | `DELETE` | `/delete/:table/:id`  | Excluir registro pelo ID           |
@@ -63,7 +62,7 @@ src/
 [
   {
     "id": "3209b136-234a-4894-a34b-...",
-    "genre": "Ficção",
+    "genre": "Romance",
     "books": [
       { "id": "9234fbb8-fd72-43fa-a49b-...", "name": "Dom Casmurro" }
     ]
