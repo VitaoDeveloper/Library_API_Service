@@ -3,16 +3,12 @@ import { create_service, delete_service, edit_service, getall_service } from "..
 import { Request, Response } from "express";
 import { Table, MainParams } from "../types/Params";
 import MainResponse from "../interface/MainResponse";
+import handle_null_return from "../handlers/null_return";
 
 export async function getall_controller({}: Request, res: Response) {
     const result = await getall_service();
 
-    const library_data = Object.fromEntries(
-        Object.entries(result).map(([key, values]) => [
-            key,
-            values.filter((v) => v != null),
-        ])
-    );
+    const library_data = handle_null_return(result);
     
     return res.status(200).json(library_data);
 }
